@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}">Go Back</a><br/>	
+	<a href="${contextPath}/signup.htm">Go Back</a><br/>	
 	<h1>Register a new seller</h1>
 	<form:form action="sellersignup.htm" commandName="seller" method="post">
 		<table>

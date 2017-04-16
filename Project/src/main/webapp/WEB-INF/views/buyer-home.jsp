@@ -8,7 +8,7 @@
 <title>Buyer Home Page</title>
 </head>
 <body>
-	<h1>Hi, ${user.firstName}</h1>
+	<h1>Hi Buyer:, ${user.firstName}</h1>
 	
 	<a href="logout.htm">Logout</a>
 </body>

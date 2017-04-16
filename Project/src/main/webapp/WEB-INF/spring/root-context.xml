@@ -9,4 +9,6 @@
 	
 	<bean id="sellerValidator" class="com.neu.project.validator.SellerValidator"></bean>		
 	<bean id="sellerDao" class="com.neu.project.dao.SellerDAO" ></bean>	
+	
+	<bean id="adminDao" class="com.neu.project.dao.AdminDAO" ></bean>	
 </beans>

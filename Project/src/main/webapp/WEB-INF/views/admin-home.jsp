@@ -5,11 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Seller Home Page</title>
+<title>Admin Home Page</title>
 </head>
 <body>
-	<h1>Hi Seller:, ${seller.firstName}</h1>
-	
 	<a href="logout.htm">Logout</a>
+	<h1>Hi <span style="text-transform:capitalize;">${admin.username},</span></h1>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<a href="${contextPath}/view-sellers.htm">View Sellers</a> 	
 </body>
 </html>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<a href="${contextPath}">Go Back</a><br/>
+<a href="${contextPath}/index.htm">Go Back</a><br/>
 <h1>SignUp page</h1>
 <form method="post" action="redirectsignup.htm">
   <input type="radio" name="signup" value="buyer"> SignUp as Buyer<br>

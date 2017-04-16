@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Seller Home Page</title>
+<title>Login Error</title>
 </head>
 <body>
-	<h1>Hi Seller:, ${seller.firstName}</h1>
-	
-	<a href="logout.htm">Logout</a>
+	Sorry! Your Username/Password is incorrect.
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<a href="${contextPath}/login.htm">Click here</a> to login.
 </body>
 </html>

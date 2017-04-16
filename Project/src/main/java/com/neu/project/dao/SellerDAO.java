@@ -35,6 +35,49 @@ public class SellerDAO extends DAO {
 		}
 	}
 	
+	public List<Seller> list() throws SellerException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from Seller");
+            List<Seller> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new SellerException("Could not list the sellers", e);
+        }
+    }
+	
+	public void activateSeller(int sellerId) throws SellerException {
+		try {
+			begin();
+			Query q = getSession().createQuery("Update Seller set status = :status where personID = :personID");
+			q.setBoolean("status", true);
+			q.setInteger("personID", sellerId);
+			int res = q.executeUpdate();
+			commit();
+			close();
+		} catch(HibernateException e) {
+			rollback();
+            throw new SellerException("Could not activate the seller", e);
+		}
+	}
+	
+	public void deactivateSeller(int sellerId) throws SellerException {
+		try {
+			begin();
+			Query q = getSession().createQuery("Update Seller set status = :status where personID = :personID");
+			q.setBoolean("status", false);
+			q.setInteger("personID", sellerId);
+			int res = q.executeUpdate();
+			commit();
+			close();
+		} catch(HibernateException e) {
+			rollback();
+            throw new SellerException("Could not activate the seller", e);
+		}
+	}
+	
 	public Seller get(int sellerId) throws SellerException {
 		try {
 			begin();

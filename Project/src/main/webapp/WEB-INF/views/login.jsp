@@ -9,12 +9,14 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<a href="${contextPath}">Go Back</a><br/>
+<a href="${contextPath}/index.htm">Go Back</a><br/>
 <h1>Login page</h1>
 <form method="post" action="redirectlogin.htm">
-  <input type="radio" name="login" value="admin"> Login as Admin<br>
+  <input type="radio" name="login" value="admin" checked> Login as Admin<br>
   <input type="radio" name="login" value="buyer"> Login as Buyer<br>
   <input type="radio" name="login" value="seller"> Login as Seller<br>
+  <input type="text" name="username" placeholder="Username" required />
+  <input type="password" name="password" placeholder="Password" required />
   <input type="submit" value="Submit" />
 </form>
 </body>

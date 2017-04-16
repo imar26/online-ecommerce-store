@@ -60,33 +60,4 @@ public class SellerController {
 			return new ModelAndView("error", "errorMessage", "error while login");
 		}
 	}
-	
-	@RequestMapping(value = "/sellerlogin.htm", method = RequestMethod.POST)
-	protected String loginUser(HttpServletRequest request) throws Exception {
-
-		HttpSession session = (HttpSession) request.getSession();
-		
-		try {
-
-			System.out.print("loginUser");
-
-			Seller s = sellerDao.get(request.getParameter("username"), request.getParameter("password"));
-			
-			if(s == null){
-				System.out.println("UserName/Password does not exist");
-				session.setAttribute("errorMessage", "UserName/Password does not exist");
-				return "error";
-			}
-			
-			session.setAttribute("seller", s);
-			
-			return "seller-home";
-
-		} catch (SellerException e) {
-			System.out.println("Exception: " + e.getMessage());
-			session.setAttribute("errorMessage", "error while login");
-			return "error";
-		}
-
-	}
 }
