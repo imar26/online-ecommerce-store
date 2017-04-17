@@ -45,4 +45,26 @@ public class AdminController {
 			return new ModelAndView("error", "errorMessage", "error while login");
 		}			
 	}
+	
+	@RequestMapping(value = "/active-sellers.htm", method = RequestMethod.GET)
+	public ModelAndView activeSellers(HttpServletRequest request) throws Exception {
+		try {						
+			List<Seller> sellers = sellerDao.activelist();
+			return new ModelAndView("active-sellers", "sellers", sellers);			
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			return new ModelAndView("error", "errorMessage", "error while login");
+		}			
+	}
+	
+	@RequestMapping(value = "/pending-sellers.htm", method = RequestMethod.GET)
+	public ModelAndView deactiveSellers(HttpServletRequest request) throws Exception {
+		try {						
+			List<Seller> sellers = sellerDao.deactivelist();
+			return new ModelAndView("pending-sellers", "sellers", sellers);			
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			return new ModelAndView("error", "errorMessage", "error while login");
+		}			
+	}
 }

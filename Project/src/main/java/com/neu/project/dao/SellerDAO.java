@@ -48,6 +48,34 @@ public class SellerDAO extends DAO {
         }
     }
 	
+	public List<Seller> activelist() throws SellerException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from Seller where status = :status");
+            q.setBoolean("status", true);
+            List<Seller> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new SellerException("Could not list the sellers", e);
+        }
+    }
+	
+	public List<Seller> deactivelist() throws SellerException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from Seller where status = :status");
+            q.setBoolean("status", false);
+            List<Seller> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new SellerException("Could not list the sellers", e);
+        }
+    }
+	
 	public void activateSeller(int sellerId) throws SellerException {
 		try {
 			begin();
