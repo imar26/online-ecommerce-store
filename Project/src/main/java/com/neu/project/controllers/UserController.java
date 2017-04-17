@@ -20,7 +20,7 @@ import com.neu.project.exception.UserException;
 import com.neu.project.dao.UserDAO;
 
 @Controller
-//@RequestMapping("/buyer/*")
+@RequestMapping("/buyer/*")
 public class UserController {
 	@Autowired
     @Qualifier("userDao")
@@ -35,13 +35,13 @@ public class UserController {
 		binder.setValidator(validator);
 	}
 	
-	@RequestMapping(value = "/buyersignup.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/buyer/buyersignup.htm", method = RequestMethod.GET)
 	protected ModelAndView registerUser() throws Exception {
 		return new ModelAndView("buyer-signup", "user", new User());
 
 	}
 	
-	@RequestMapping(value = "/buyersignup.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/buyer/buyersignup.htm", method = RequestMethod.POST)
 	protected ModelAndView registerBuyer(HttpServletRequest request,  @ModelAttribute("user") User user, BindingResult result) throws Exception {
 		try {
 //			System.out.println(request.getParameter("username"));

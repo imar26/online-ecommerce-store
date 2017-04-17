@@ -23,6 +23,7 @@ import com.neu.project.validator.SellerValidator;
 import com.neu.project.validator.UserValidator;
 
 @Controller
+@RequestMapping("/seller/*")
 public class SellerController {
 	@Autowired
     @Qualifier("sellerDao")
@@ -37,13 +38,13 @@ public class SellerController {
 		binder.setValidator(validator);
 	}
 	
-	@RequestMapping(value = "/sellersignup.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/seller/sellersignup.htm", method = RequestMethod.GET)
 	protected ModelAndView registerSeller() throws Exception {
 		return new ModelAndView("seller-signup", "seller", new Seller());
 
 	}
 	
-	@RequestMapping(value = "/sellersignup.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/seller/sellersignup.htm", method = RequestMethod.POST)
 	protected ModelAndView registerSeller(HttpServletRequest request,  @ModelAttribute("seller") Seller seller, BindingResult result) throws Exception {
 		try {
 			Boolean b1 = sellerDao.checkIfUsernameExists(request.getParameter("username"));
