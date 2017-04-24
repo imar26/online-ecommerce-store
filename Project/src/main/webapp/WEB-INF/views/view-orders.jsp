@@ -41,7 +41,7 @@
 						<td>${order.product.seller.companyName}</td>
 						<td class="action_${order.orderID}">
 							<c:if test="${view_pdf == 'true'}">
-								<a href="#" class="view_pdf">View PDF</a>
+								<a href="/buyer/pdf.htm?id=${order.orderID}" class="view_pdf">View PDF</a>
 							</c:if>
 						</td>
 						<c:set var="total" value="${total+totalPrice}" />
