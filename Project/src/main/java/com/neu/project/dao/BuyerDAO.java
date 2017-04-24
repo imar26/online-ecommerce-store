@@ -103,11 +103,11 @@ public class BuyerDAO extends DAO {
 		}
 	}
 	
-	public void deleteProduct(int productId, Long userId) throws ProductException {
+	public void deleteProduct(Long productId, Long userId) throws ProductException {
 		try {
 			begin();
 			Query q = getSession().createQuery("delete Cart where productID = :productId AND userID = :userId");
-			q.setInteger("productId", productId);
+			q.setLong("productId", productId);
 			q.setLong("userId", userId);
 			int res = q.executeUpdate();
 			commit();

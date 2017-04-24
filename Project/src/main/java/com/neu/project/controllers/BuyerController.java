@@ -49,7 +49,7 @@ public class BuyerController {
 			User user = (User)request.getSession().getAttribute("user");
 			Long userId = user.getPersonID();
 			System.out.println("ID is: "+productID);
-			buyerDao.deleteProduct(productID, userId);
+			buyerDao.deleteProduct(pId, userId);
 			Long prd_qty = Long.parseLong(request.getParameter("prd_qty"));
 			System.out.println(prd_qty);
 			Product pQty = productDao.get(productID);
