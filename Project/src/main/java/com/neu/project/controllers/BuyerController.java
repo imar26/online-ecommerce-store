@@ -17,6 +17,7 @@ import com.neu.project.dao.ProductDAO;
 import com.neu.project.exception.BuyerException;
 import com.neu.project.exception.ProductException;
 import com.neu.project.pojo.Product;
+import com.neu.project.pojo.User;
 
 @Controller
 public class BuyerController {
@@ -45,8 +46,10 @@ public class BuyerController {
 		try {
 			int productID = Integer.parseInt(request.getParameter("productID"));
 			Long pId = Long.parseLong(request.getParameter("productID"));
+			User user = (User)request.getSession().getAttribute("user");
+			Long userId = user.getPersonID();
 			System.out.println("ID is: "+productID);
-			buyerDao.deleteProduct(productID);
+			buyerDao.deleteProduct(productID, userId);
 			Long prd_qty = Long.parseLong(request.getParameter("prd_qty"));
 			System.out.println(prd_qty);
 			Product pQty = productDao.get(productID);
