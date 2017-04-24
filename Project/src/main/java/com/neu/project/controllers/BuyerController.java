@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.neu.project.dao.BuyerDAO;
 import com.neu.project.dao.ProductDAO;
@@ -124,8 +129,47 @@ public class BuyerController {
 			o.setOrderID(max_value);
 			buyerDao.insertOrder(o);
 			buyerDao.deleteProduct(c.getProduct().getProductID(), userid);
+			System.out.println("Order placed. Now sending email.");
+			Email email = new SimpleEmail();
+	        email.setSmtpPort(465);
+	        email.setAuthenticator(new DefaultAuthenticator("aadeshranderia26@gmail.com", "Dock443slew224@"));
+	        email.setHostName("smtp.gmail.com");//if a server is capable of sending email.
+	        email.setSSL(true);//setSSLOnConnect(true);
+	        email.setFrom("aadeshranderia26@gmail.com");
+	        email.setSubject("Order Placed Successfully");
+	        email.setMsg("Your Order has been placed successfully.\n\n"
+	        		+"\nYOUR USERNAME IS:\t"+user.getUsername()+"\n\n"
+	        		+"\nThe package will be delivered to the following address in the next 4-6 business days.\n\n"
+	        		+"\nYour Shipping Address:\n\n"
+	        		+user.getAddress().get(1).getStreet()+"\n\n"
+	        		+user.getAddress().get(1).getCity()+"\n\n"
+	        		+user.getAddress().get(1).getState()+"\n\n"
+	        		+user.getAddress().get(1).getZip()+"\n\n"
+	        		+user.getAddress().get(1).getCountry()+"\n\n"
+	                +"Thank you for placing the Order!");
+	        email.addTo(user.getEmail().getEmailAddress());
+	        email.setTLS(true);//startTLS.enable.true
+	        email.send();
+	        System.out.println("Email sent successfully");
 		}
 		
 		return new ModelAndView("buy-success");
 	}
+	
+	@RequestMapping(value="/buyer/receipt.htm", method = RequestMethod.GET)
+    public ModelAndView pdfview(HttpServletRequest request) throws Exception
+    {
+        System.out.println("In Order pdf method");
+                        
+        View view = new MyView();
+        System.out.println("In Order pdf method again");
+        String id = request.getParameter("id");
+        Long orderId = Long.parseLong(id);
+        
+        List<Order> list = buyerDao.orderlistpdf(orderId);
+        System.out.println("OrderList size"+list.size());
+                
+        System.out.println("orderId"+orderId);
+        return new ModelAndView(view,"list",list);
+    }
 }

@@ -48,6 +48,20 @@ public class BuyerDAO extends DAO {
         }
     }
 	
+	public List<Order> orderlistpdf(Long orderId) throws ProductException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from Order where orderID = :orderId");
+            q.setLong("orderId", orderId);
+            List<Order> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new ProductException("Could not list the orders", e);
+        }
+    }
+	
 	public List<Cart> cartlist(int userId) throws ProductException {
         try {
             begin();
