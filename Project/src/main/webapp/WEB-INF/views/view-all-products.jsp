@@ -43,6 +43,7 @@
 		<div class="row">
 			<c:forEach var="product" items="${products}">
 				<c:if test="${!empty product.categories}">
+				<c:if test="${product.seller.status == true }">
 				<div class="col-md-6">
 					<div class="w3-container">	
 						<div class="w3-panel w3-card-4">
@@ -57,6 +58,7 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
 				</c:if>
 			</c:forEach>
 		</div>

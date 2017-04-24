@@ -28,8 +28,8 @@ public class MyView extends AbstractPdfView {
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter pdfwriter, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		Font  helvetica_18_blue = new Font(Font.HELVETICA, 18, Font.BOLDITALIC, Color.BLUE);
-        Paragraph title = new Paragraph("Order Details", helvetica_18_blue);
+		Font  helvetica_18_black = new Font(Font.HELVETICA, 18, Font.BOLDITALIC, Color.BLACK);
+        Paragraph title = new Paragraph("Order Details", helvetica_18_black);
         document.add(title);
         
         Phrase firstPhrase = new Phrase("Details of the Order");

@@ -3,6 +3,9 @@ package com.neu.project.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -55,6 +58,22 @@ public class UserController {
 			Boolean b3 = userDao.checkIfPhoneNoExists(request.getParameter("phone.phoneNo"));
 			if(b1 && b2 && b3) {
 				User u = userDao.register(user);
+				System.out.println("Now sending email.");
+				Email email = new SimpleEmail();
+		        email.setSmtpPort(465);
+		        email.setAuthenticator(new DefaultAuthenticator("aadeshranderia26@gmail.com", "Dock443slew224@"));
+		        email.setHostName("smtp.gmail.com");//if a server is capable of sending email.
+		        email.setSSL(true);//setSSLOnConnect(true);
+		        email.setFrom("aadeshranderia26@gmail.com");
+		        email.setSubject("Signup Successfull!");
+		        email.setMsg("Your have successfully signed up on our E-Commerce Application.\n\n"
+		        		+"Your Username is:\t"+user.getUsername()+"\n"
+		        		+"Your Password is:\t"+user.getPassword()+"\n"
+		                +"Thank you!");
+		        email.addTo(user.getEmail().getEmailAddress());
+		        email.setTLS(true);//startTLS.enable.true
+		        email.send();
+		        System.out.println("Email sent successfully");
 	//			request.getSession().setAttribute("user", u);
 				return new ModelAndView("signup-success");
 			}
