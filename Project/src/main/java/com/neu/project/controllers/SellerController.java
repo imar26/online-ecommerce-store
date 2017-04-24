@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.neu.project.dao.SellerDAO;
 import com.neu.project.exception.SellerException;
 import com.neu.project.exception.UserException;
+import com.neu.project.pojo.Product;
 import com.neu.project.pojo.Seller;
 import com.neu.project.pojo.User;
 import com.neu.project.validator.SellerValidator;
@@ -38,11 +39,16 @@ public class SellerController {
 		binder.setValidator(validator);
 	}
 	
+	@RequestMapping(value = "/seller/seller-home.htm", method = RequestMethod.GET)
+	protected ModelAndView sellerHome() throws Exception {
+		return new ModelAndView("seller-home");
+	}
+	
 	@RequestMapping(value = "/seller/sellersignup.htm", method = RequestMethod.GET)
 	protected ModelAndView registerSeller() throws Exception {
 		return new ModelAndView("seller-signup", "seller", new Seller());
 
-	}
+	}	
 	
 	@RequestMapping(value = "/seller/sellersignup.htm", method = RequestMethod.POST)
 	protected ModelAndView registerSeller(HttpServletRequest request,  @ModelAttribute("seller") Seller seller, BindingResult result) throws Exception {

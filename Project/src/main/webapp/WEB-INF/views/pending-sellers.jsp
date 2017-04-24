@@ -31,21 +31,7 @@
 														cache : false,
 														success : function(
 																response) {
-															$(
-																	'.status_'
-																			+ response)
-																	.text(
-																			"Approved");
-															$(
-																	'.action_'
-																			+ response)
-																	.find("a")
-																	.removeClass(
-																			"activate")
-																	.addClass(
-																			"deactivate")
-																	.text(
-																			"Deactivate Seller");
+																$("#row-"+response).fadeOut();														
 														}
 													});
 										});
@@ -54,7 +40,8 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}/view-sellers.htm">Go back</a>
+	<a href="${contextPath}/logout.htm">Logout</a>
+	<a href="${contextPath}/admin/view-sellers.htm">Go back</a>
 	<h1>List of Pending Sellers</h1>
 	<c:choose>
 		<c:when test="${!empty sellers}">
@@ -69,7 +56,7 @@
 					<th>Action</th>
 				</tr>
 				<c:forEach var="seller" items="${sellers}">
-					<tr data-id="${seller.personID}">
+					<tr id="row-${seller.personID}" data-id="${seller.personID}">
 						<td>${seller.companyName}</td>
 						<td>${seller.firstName}</td>
 						<td>${seller.lastName}</td>

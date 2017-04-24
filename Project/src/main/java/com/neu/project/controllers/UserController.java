@@ -35,6 +35,11 @@ public class UserController {
 		binder.setValidator(validator);
 	}
 	
+	@RequestMapping(value = "/buyer/buyer-home.htm", method = RequestMethod.GET)
+	protected ModelAndView buyerHome() throws Exception {
+		return new ModelAndView("buyer-home");
+	}
+	
 	@RequestMapping(value = "/buyer/buyersignup.htm", method = RequestMethod.GET)
 	protected ModelAndView registerUser() throws Exception {
 		return new ModelAndView("buyer-signup", "user", new User());

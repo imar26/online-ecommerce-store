@@ -38,6 +38,9 @@ public class User extends Person {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Address> address = new ArrayList<Address>();
 	
+	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Cart> cart = new ArrayList<Cart>();
+	
 	public User(String username, String password) {
 		super();
 		this.username = username;
@@ -100,4 +103,13 @@ public class User extends Person {
 		address.remove(add);
 		add.setUser(null);
 	}
+
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+	
 }

@@ -48,9 +48,10 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}/admin-home.htm">Go back</a>
-	<a href="${contextPath}/active-sellers.htm">Active Sellers</a>
-	<a href="${contextPath}/pending-sellers.htm">Pending Sellers</a>
+	<a href="${contextPath}/logout.htm">Logout</a>
+	<a href="${contextPath}/admin/admin-home.htm">Go back</a>
+	<a href="${contextPath}/admin/active-sellers.htm">Active Sellers</a>
+	<a href="${contextPath}/admin/pending-sellers.htm">Pending Sellers</a>
 	<br />
 
 	<br />

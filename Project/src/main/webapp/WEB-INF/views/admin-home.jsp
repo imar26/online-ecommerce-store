@@ -8,9 +8,11 @@
 <title>Admin Home Page</title>
 </head>
 <body>
-	<a href="logout.htm">Logout</a>
-	<h1>Hi <span style="text-transform:capitalize;">${admin.username},</span></h1>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}/view-sellers.htm">View Sellers</a> 	
+	<a href="${contextPath}/logout.htm">Logout</a>
+	<h1>Hi <span style="text-transform:capitalize;">${admin.username},</span></h1>
+	
+	<a href="${contextPath}/admin/view-sellers.htm">Manage Sellers</a><br/>
+	<a href="${contextPath}/admin/manage-categories.htm">Manage Categories</a> 	
 </body>
 </html>

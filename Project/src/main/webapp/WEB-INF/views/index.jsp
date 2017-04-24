@@ -8,8 +8,8 @@
 <h1>
 	Welcome to Online E-Commerce Store.  
 </h1>
-
-<a href="login.htm">Login</a>
-<a href="signup.htm">Signup</a>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<a href="${contextPath}/login.htm">Login</a>
+<a href="${contextPath}/signup.htm">Signup</a>
 </body>
 </html>

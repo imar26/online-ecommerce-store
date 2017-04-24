@@ -10,6 +10,6 @@
 <body>
 	Ooops.. Seems like your Username/Email ID/Phone no already exists.
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}/buyersignup.htm">Go Back</a> to the signup page.<br/>
+	<a href="${contextPath}/buyer/buyersignup.htm">Go Back</a> to the signup page.<br/>
 </body>
 </html>

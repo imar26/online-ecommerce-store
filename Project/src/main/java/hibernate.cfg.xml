@@ -19,5 +19,8 @@
 		<mapping class="com.neu.project.pojo.Phone" />
 		<mapping class="com.neu.project.pojo.Address" />
 		<mapping class="com.neu.project.pojo.Seller" />
+		<mapping class="com.neu.project.pojo.Category" />
+		<mapping class="com.neu.project.pojo.Product" />
+		<mapping class="com.neu.project.pojo.Cart" />
     </session-factory>
 </hibernate-configuration>

@@ -1,11 +1,15 @@
 package com.neu.project.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -35,6 +39,9 @@ public class Seller extends Person {
 	
 	@OneToOne(mappedBy = "seller" , cascade = CascadeType.ALL)
 	private Address address;
+	
+	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+	private List<Product> product = new ArrayList<Product>();
 	
 	public Seller(String companyName) {
 		this.companyName = companyName;
@@ -104,6 +111,14 @@ public class Seller extends Person {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}	
 	
 }

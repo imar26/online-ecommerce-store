@@ -8,8 +8,10 @@
 <title>Seller Home Page</title>
 </head>
 <body>
-	<h1>Hi Seller:, ${seller.firstName}</h1>
-	
-	<a href="logout.htm">Logout</a>
+	<h1>Hi, ${seller.firstName}</h1>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<a href="${contextPath}/logout.htm">Logout</a><br/><br/>
+	<a href="${contextPath}/seller/add-products.htm">Add Products</a><br/>
+	<a href="${contextPath}/seller/view-products.htm?sellerId=${seller.personID}">View Products</a>
 </body>
 </html>
