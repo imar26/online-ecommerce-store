@@ -66,6 +66,7 @@
 	<a href="${contextPath}/logout.htm">Logout</a>
 	<a href="${contextPath}/buyer/view-all-products.htm">Go back</a>
 	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>
+	<a href="${contextPath}/buyer/order.htm">Orders</a>
 
 	<div class="container">
 		<div class="row">

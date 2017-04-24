@@ -34,7 +34,8 @@
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
 	<a href="${contextPath}/buyer/buyer-home.htm">Go back</a>
-	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>	
+	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>
+	<a href="${contextPath}/buyer/order.htm">Orders</a>	
 	
 	<h1>List of Products</h1>
 	

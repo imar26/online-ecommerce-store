@@ -54,6 +54,9 @@ public class Product {
 	@OneToMany(mappedBy = "products")
     private List<Cart> cart = new ArrayList<Cart>();
 	
+	@OneToMany(mappedBy = "products")
+    private List<Order> order = new ArrayList<Order>();
+	
 	public Product(String productName, String productDesc, String productPrice, long productQuantity) {
 		this.productName = productName;
 		this.productDesc = productDesc;
@@ -135,6 +138,22 @@ public class Product {
 
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
+	}
+
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 	
 }

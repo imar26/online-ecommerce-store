@@ -22,5 +22,6 @@
 		<mapping class="com.neu.project.pojo.Category" />
 		<mapping class="com.neu.project.pojo.Product" />
 		<mapping class="com.neu.project.pojo.Cart" />
+		<mapping class="com.neu.project.pojo.Order" />
     </session-factory>
 </hibernate-configuration>

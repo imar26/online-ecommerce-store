@@ -41,6 +41,9 @@ public class User extends Person {
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Cart> cart = new ArrayList<Cart>();
 	
+	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Order> order = new ArrayList<Order>();
+	
 	public User(String username, String password) {
 		super();
 		this.username = username;
@@ -110,6 +113,14 @@ public class User extends Person {
 
 	public void setCart(List<Cart> cart) {
 		this.cart = cart;
+	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 	
 }

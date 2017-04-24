@@ -35,9 +35,9 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
-	<a href="${contextPath}/buyer/view-all-products.htm">View All
-		Products</a>
+	<a href="${contextPath}/buyer/view-all-products.htm">View All Products</a>
 	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>
+	<a href="${contextPath}/buyer/order.htm?uid=${user.personID}">Orders</a>
 
 	<h1>Your Cart</h1>
 	<c:choose>
@@ -66,7 +66,8 @@
 				<h3>Total Calculated Price: $<span id="total"><c:out value="${total}" /></span></h3>	
 				</div>				
 			</table>
-			
+			<br/>
+			<a href="${contextPath}/buyer/buy-now.htm">Buy Now!</a>
 		</c:when>
 		<c:otherwise>
 			<c:out value="No Products in Cart" />

@@ -5,15 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Buyer Home Page</title>
+<title>Order Success</title>
 </head>
 <body>
-	<h1>Hi, ${user.firstName}</h1>
-	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<a href="${contextPath}/logout.htm">Logout</a>
-	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>
-	<a href="${contextPath}/buyer/order.htm">Orders</a><br/>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />	
 	
-	<a href="${contextPath}/buyer/view-all-products.htm">View All Products</a>
+	Congratulations! Your Order has been placed successfully. <br/>
+	<a href="${contextPath}/buyer/view-all-products.htm">Click here</a> to shop more. <br/>
+	<a href="${contextPath}/buyer/order.htm">Click here</a> to view orders. <br/>
 </body>
 </html>
