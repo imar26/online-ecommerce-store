@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -179,6 +180,14 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("products", productDao.list());		
 		mv.setViewName("view-all-products");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/buyer/search-products.htm", method = RequestMethod.GET)
+	protected ModelAndView searchProd(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("products", productDao.list());		
+		mv.setViewName("search-products");
 		return mv;
 	}
 	

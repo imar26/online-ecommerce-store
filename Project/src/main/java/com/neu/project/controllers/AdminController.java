@@ -3,6 +3,7 @@ package com.neu.project.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +80,50 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/view-sellers.htm", method = RequestMethod.GET)
 	public ModelAndView viewSellers(HttpServletRequest request) throws Exception {
-		try {						
-			List<Seller> sellers = sellerDao.list();
-			return new ModelAndView("view-sellers", "sellers", sellers);			
+		try {	
+			ModelAndView mv = new ModelAndView();
+			
+			HttpSession session= (HttpSession)request.getSession();
+			int startpage = (Integer)session.getAttribute("startpage");
+			System.out.println("Start page: "+startpage);
+			String type=request.getParameter("side");
+			
+			if(type==null || type.equals("next")) {
+				int endpage = startpage + 2;
+				System.out.println("Endpage : "+endpage);
+				int totalSize=sellerDao.getTotalCount();
+				System.out.println("size: "+totalSize);
+		        if(endpage>totalSize) {
+		        	endpage=totalSize - 2;
+		        	System.out.println("Inner Endpage : "+endpage);
+		            System.out.println("If gt , startPage = "+endpage);
+		            mv.addObject("sellers",sellerDao.paginateList(endpage, 2));
+		        } else {
+		        	mv.addObject("sellers",sellerDao.paginateList(startpage, 2));
+		        }
+		        mv.setViewName("view-sellers");
+		        
+		        session.setAttribute("startpage",endpage);
+			} else if(type.equals("back")) {
+				int endpage = startpage-2;
+				System.out.println("Back Endpage : "+endpage);
+				if(endpage<0) {
+					mv.addObject("sellers",sellerDao.paginateList(0, 2));
+					mv.setViewName("view-sellers");
+	                session.setAttribute("startpage",2);
+	                return mv;
+				}
+				startpage=endpage;
+	            mv.addObject("sellers",sellerDao.paginateList(startpage, 2));
+	            mv.setViewName("view-sellers");
+	            
+	            session.setAttribute("startpage",endpage);
+			}
+			
+//			List<Seller> sellers = sellerDao.list();
+//			return new ModelAndView("view-sellers", "sellers", sellers);
+			
+			return mv;
 		} catch (HibernateException e) {
 			System.out.println(e.getMessage());
 			return new ModelAndView("error", "errorMessage", "error while login");

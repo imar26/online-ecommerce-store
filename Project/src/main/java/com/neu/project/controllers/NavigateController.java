@@ -80,10 +80,10 @@ public class NavigateController {
 				User u = userDao.get(request.getParameter("username"), request.getParameter("password"));
 				if (u == null) {
 					System.out.println("UserName/Password does not exist");
-					session.setAttribute("errorMessage", "UserName/Password does not exist");
+					session.setAttribute("errorMessage", "UserName/Password does not exist");					
 					return new ModelAndView("error");
 				}
-				
+				//session.setAttribute("startpage", 1);
 				session.setAttribute("user", u);
 				
 				return new ModelAndView("buyer-home");
@@ -129,6 +129,7 @@ public class NavigateController {
 					return new ModelAndView("error");
 				}
 				
+				session.setAttribute("startpage", 0);
 				session.setAttribute("admin", a);
 				
 				return new ModelAndView("admin-home");

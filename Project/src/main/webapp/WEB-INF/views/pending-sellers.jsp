@@ -41,7 +41,7 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
-	<a href="${contextPath}/admin/view-sellers.htm">Go back</a>
+	<!-- <a href="${contextPath}/admin/view-sellers.htm">Go back</a> -->
 	<h1>List of Pending Sellers</h1>
 	<c:choose>
 		<c:when test="${!empty sellers}">

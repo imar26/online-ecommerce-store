@@ -45,6 +45,39 @@
 		});
 	});
 </script>
+<style>
+	body {
+		margin: 10px;
+	}
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.row {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+	.col-md-6 {
+	    width: 50%;
+	    float: left;
+	    padding-right: 15px;
+    	padding-left: 15px;
+    	position: relative;    	
+	}
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	.pagination {
+		text-align: center;
+	}
+	table {
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -87,5 +120,13 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div class="container">
+		<div class="row">
+			<div class="pagination">
+			    <a href="${contextPath}/admin/view-sellers.htm?side=back">&laquo;</a>
+			    <a href="${contextPath}/admin/view-sellers.htm?side=next">&raquo;</a>
+			</div>
+		</div>
+	</div>		
 </body>
 </html>

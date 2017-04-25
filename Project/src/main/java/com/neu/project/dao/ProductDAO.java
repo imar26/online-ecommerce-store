@@ -9,6 +9,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.Transaction;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,36 +23,36 @@ import com.neu.project.pojo.Product;
 
 public class ProductDAO extends DAO {
 	public ProductDAO() {
-		
+
 	}
-	
+
 	public List<Product> list(int sellerId) throws ProductException {
-        try {
-            begin();
-            Query q = getSession().createQuery("from Product where seller = :sellerid");
-            q.setInteger("sellerid", sellerId);
-            List<Product> list = q.list();
-            commit();
-            return list;
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProductException("Could not list the products", e);
-        }
-    }
-	
+		try {
+			begin();
+			Query q = getSession().createQuery("from Product where seller = :sellerid");
+			q.setInteger("sellerid", sellerId);
+			List<Product> list = q.list();
+			commit();
+			return list;
+		} catch (HibernateException e) {
+			rollback();
+			throw new ProductException("Could not list the products", e);
+		}
+	}
+
 	public List<Product> list() throws ProductException {
-        try {
-            begin();
-            Query q = getSession().createQuery("from Product");
-            List<Product> list = q.list();
-            commit();
-            return list;
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProductException("Could not list the products", e);
-        }
-    }
-	
+		try {
+			begin();
+			Query q = getSession().createQuery("from Product");
+			List<Product> list = q.list();
+			commit();
+			return list;
+		} catch (HibernateException e) {
+			rollback();
+			throw new ProductException("Could not list the products", e);
+		}
+	}
+
 	public Product get(int productId) throws ProductException {
 		try {
 			begin();
@@ -65,21 +66,21 @@ public class ProductDAO extends DAO {
 			throw new ProductException("Could not get product " + productId, e);
 		}
 	}
-	
+
 	public Product addProduct(Product p)
 			throws ProductException {
 		try {
 			begin();
 			System.out.println("inside Product DAO");
-			
-//			Seller seller = new Seller(p.getSeller().getFirstName());
-//			Product product = new Product(p.getProductName(), p.getProductDesc(), p.getProductPrice(), p.getProductQuantity());
-//			product.setProductName(p.getProductName());
-//			product.setProductDesc(p.getProductDesc());
-//			product.setProductPrice(p.getProductPrice());
-//			product.setProductQuantity(p.getProductQuantity());
-//			product.setSeller(seller);
-			
+
+			//			Seller seller = new Seller(p.getSeller().getFirstName());
+			//			Product product = new Product(p.getProductName(), p.getProductDesc(), p.getProductPrice(), p.getProductQuantity());
+			//			product.setProductName(p.getProductName());
+			//			product.setProductDesc(p.getProductDesc());
+			//			product.setProductPrice(p.getProductPrice());
+			//			product.setProductQuantity(p.getProductQuantity());
+			//			product.setSeller(seller);
+
 			getSession().save(p);
 			commit();
 			return p;
@@ -89,13 +90,13 @@ public class ProductDAO extends DAO {
 			throw new ProductException("Exception while creating product: " + e.getMessage());
 		}
 	}
-	
+
 	public void updateProduct(Product p)
 			throws ProductException {
 		try {
 			begin();
 			System.out.println("inside update Product DAO");
-			
+
 			Query q = getSession().createQuery("Update Product set productDesc = :productDesc, productPrice = :productPrice, productQuantity = :productQuantity, fileName = :filename where productID = :productID");
 			q.setLong("productID", p.getProductID());
 			q.setString("productDesc", p.getProductDesc());
@@ -116,7 +117,7 @@ public class ProductDAO extends DAO {
 			throw new ProductException("Exception while creating product: " + e.getMessage());
 		}
 	}
-	
+
 	public void updateQty(Long qty_cart, Long productId) throws BuyerException {
 		try {		
 			System.out.println("updateCart");
@@ -132,7 +133,7 @@ public class ProductDAO extends DAO {
 			throw new BuyerException("Error while updating cart: " + e.getMessage());
 		}
 	}
-	
+
 	public void deleteProduct(int productId) throws ProductException {
 		try {
 			begin();
@@ -143,7 +144,7 @@ public class ProductDAO extends DAO {
 			close();
 		} catch(HibernateException e) {
 			rollback();
-            throw new ProductException("Could not delete the product", e);
+			throw new ProductException("Could not delete the product", e);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.neu.project.exception.BuyerException;
 import com.neu.project.exception.ProductException;
@@ -26,6 +27,22 @@ public class BuyerDAO extends DAO {
             Query q = getSession().createQuery("from Cart where userID = :userId");
             q.setInteger("userId", userId);
             List<Product> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new ProductException("Could not list the products", e);
+        }
+    }
+	
+	public List<Product> searchProducts(String keyword) throws ProductException {
+        try {
+        	System.out.println("In search products dao");
+            begin();
+            Criteria crit = getSession().createCriteria(Product.class);
+            crit.add(Restrictions.ilike("productName", "%"+keyword+"%"));
+            List<Product> list = crit.list();
+            System.out.println("List size: "+list.size());
             commit();
             return list;
         } catch (HibernateException e) {

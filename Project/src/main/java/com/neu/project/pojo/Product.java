@@ -45,10 +45,10 @@ public class Product {
 	@Column(name = "fileName")
 	private String fileName;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
     private Seller seller;
 	
-	@ManyToMany(mappedBy="products")
+	@ManyToMany(mappedBy="products", fetch=FetchType.EAGER)
 	private Set<Category> categories = new HashSet<Category>();
 	
 	@OneToMany(mappedBy = "products")

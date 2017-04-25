@@ -3,20 +3,53 @@ package com.neu.project.dao;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
+import com.neu.project.exception.ProductException;
 import com.neu.project.exception.SellerException;
 import com.neu.project.exception.UserException;
 import com.neu.project.pojo.Address;
 import com.neu.project.pojo.Email;
 import com.neu.project.pojo.Phone;
+import com.neu.project.pojo.Product;
 import com.neu.project.pojo.Seller;
 import com.neu.project.pojo.User;
 
 public class SellerDAO extends DAO {
 	public SellerDAO() {
 		
+	}
+	
+	public int getTotalCount() throws SellerException {
+		try {
+			begin();
+			int count = ((Long)getSession().createQuery("select count(*) from Seller").uniqueResult()).intValue();		
+			commit();
+			return count;
+		} catch (HibernateException e) {
+			rollback();
+			throw new SellerException("Could not get seller " + e);
+		}		
+	}	
+
+	public List<Seller> paginateList(int firstResult, int maxResults) {
+
+		try {
+			begin();
+			Criteria criteria = getSession().createCriteria(Seller.class);
+			criteria.setFirstResult(firstResult);
+			criteria.setMaxResults(maxResults);
+			List<Seller> sellers = (List<Seller>)criteria.list();
+			commit();
+			close();
+			return sellers;
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public Seller get(String username, String password) throws SellerException {

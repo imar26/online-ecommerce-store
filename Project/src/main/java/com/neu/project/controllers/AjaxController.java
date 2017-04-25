@@ -1,5 +1,8 @@
 package com.neu.project.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.HibernateException;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.neu.project.dao.BuyerDAO;
 import com.neu.project.dao.CategoryDAO;
 import com.neu.project.dao.ProductDAO;
@@ -109,6 +113,24 @@ public class AjaxController {
 			System.out.println("Exception: " + e.getMessage());
 		}
 		return output;
+	}
+	
+	@RequestMapping(value = "/buyer/searchProducts.htm", method = RequestMethod.GET)
+	public @ResponseBody
+	String searchProducts(HttpServletRequest request) throws ProductException {
+		String json = "";
+		try {
+			String searchValue = request.getParameter("searchValue");
+			System.out.println("Search for: "+searchValue);
+			List<Product> searchList = buyerDao.searchProducts(searchValue);
+			System.out.println("Size List: "+searchList.size());
+			json = new Gson().toJson(searchList);
+			System.out.println("JSON:" +json);
+			return json;
+		} catch(HibernateException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}		
+		return null;
 	}
 	
 	@RequestMapping(value = "/admin/deleteCategory.htm", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
