@@ -23,6 +23,14 @@
 	
 	<context:component-scan base-package="com.neu.project.*" />
 	
-	
+	<interceptors>
+        <interceptor>
+            <mapping path="/**/*" />
+            <exclude-mapping path="/redirectlogin.htm" />
+            <beans:bean class="com.neu.project.interceptors.Interceptor">
+                <beans:property name="errorPage" value="" />
+            </beans:bean>                       
+        </interceptor>
+    </interceptors>
 	
 </beans:beans>

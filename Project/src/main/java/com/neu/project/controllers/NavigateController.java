@@ -24,39 +24,39 @@ import com.neu.project.dao.UserDAO;
 @Controller
 public class NavigateController {
 	@Autowired
-    @Qualifier("userDao")
+	@Qualifier("userDao")
 	UserDAO userDao;
-	
+
 	@Autowired
-    @Qualifier("sellerDao")
+	@Qualifier("sellerDao")
 	SellerDAO sellerDao;
-	
+
 	@Autowired
-    @Qualifier("adminDao")
+	@Qualifier("adminDao")
 	AdminDAO adminDao;
-	
+
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public ModelAndView redirectIndex(HttpServletRequest request) {
 		return new ModelAndView("index");
 	}
-	
+
 	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
 	public ModelAndView redirectLogin(HttpServletRequest request) {
 		return new ModelAndView("login");
 	}
-	
+
 	@RequestMapping(value = "/signup.htm", method = RequestMethod.GET)
 	public ModelAndView redirectSignup(HttpServletRequest request) {
 		return new ModelAndView("signup");
 	}
-	
+
 	@RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
 	public ModelAndView redirectLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return new ModelAndView("index");
 	}
-	
+
 	@RequestMapping(value = "/redirectsignup.htm", method = RequestMethod.POST)
 	public ModelAndView redirectSignupBy(HttpServletRequest request) {
 		String value = request.getParameter("signup");
@@ -66,9 +66,21 @@ public class NavigateController {
 			return new ModelAndView("seller-signup", "seller", new Seller());
 		}
 		return new ModelAndView("signup","results",null);
-		
+
 	}
-	
+
+	@RequestMapping(value = "/redirectlogin.htm", method = RequestMethod.GET)
+	public ModelAndView getLoginUser(HttpServletRequest request) {
+		System.out.println("Get Login User");
+		return new ModelAndView("login");
+	}
+
+	@RequestMapping(value = "/404")
+	public ModelAndView error404(HttpServletRequest request) {
+		System.out.println("custom error handler");
+		return new ModelAndView("error404");
+	}
+
 	@RequestMapping(value = "/redirectlogin.htm", method = RequestMethod.POST)
 	protected ModelAndView loginUser(HttpServletRequest request) throws Exception {
 
@@ -85,7 +97,7 @@ public class NavigateController {
 				}
 				//session.setAttribute("startpage", 1);
 				session.setAttribute("user", u);
-				
+				session.setAttribute("role", "buyer");
 				return new ModelAndView("buyer-home");
 			} catch(HibernateException e) {
 				System.out.println("Exception: " + e.getMessage());
@@ -96,21 +108,21 @@ public class NavigateController {
 			try {
 
 				Seller s = sellerDao.get(request.getParameter("username"), request.getParameter("password"));
-				
+
 				if(s == null){
 					System.out.println("UserName/Password does not exist");
 					session.setAttribute("errorMessage", "UserName/Password does not exist");
 					return new ModelAndView("error");
 				}
-				
+
 				boolean sell = s.getStatus();
 				System.out.println(sell);
 				if(sell == false) {
 					return new ModelAndView("seller-nologin");
 				}
-				
+
 				session.setAttribute("seller", s);
-				
+				session.setAttribute("role", "seller");
 				return new ModelAndView("seller-home");
 
 			} catch (HibernateException e) {
@@ -122,16 +134,16 @@ public class NavigateController {
 			try {
 
 				Admin a = adminDao.get(request.getParameter("username"), request.getParameter("password"));
-				
+
 				if(a == null){
 					System.out.println("UserName/Password does not exist");
 					session.setAttribute("errorMessage", "UserName/Password does not exist");
 					return new ModelAndView("error");
 				}
-				
+
 				session.setAttribute("startpage", 0);
 				session.setAttribute("admin", a);
-				
+				session.setAttribute("role", "admin");
 				return new ModelAndView("admin-home");
 
 			} catch (HibernateException e) {
@@ -140,7 +152,7 @@ public class NavigateController {
 				return new ModelAndView("error");
 			}
 		}
-//		return "";
+		//		return "";
 		return null;
 	}
 }
