@@ -15,7 +15,7 @@
 	<a href="${contextPath}/buyer/order.htm">Orders</a><br/>
 	
 	<a href="${contextPath}/buyer/view-all-products.htm">View All Products</a>
-	<a href="${contextPath}/buyer/search-products.htm">Search Products</a>
+	<!-- <a href="${contextPath}/buyer/search-products.htm">Search Products</a> -->
 	
 	
 </body>

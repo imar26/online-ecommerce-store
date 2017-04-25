@@ -5,9 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Seller View Products</title>
+<title>Search Products</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#search").keyup(function() {
+			var searchValue = $(this).val();
+			$.ajax({
+		        url: 'searchProducts.htm',		        
+		        contentType: "application/json; charset=utf-8",
+		        data: { 'searchValue': searchValue },
+		        type: 'GET',
+		        cache: false,
+		        dataType:'JSON',
+		        success: function (response) {
+		        	alert(response);
+		        },
+		        error: function (response) {
+					alert("Error "+response);
+				}
+		    });
+		});
+	});
+</script>
 <style>
 	body {
 		margin: 10px;
@@ -29,14 +50,6 @@
     	padding-left: 15px;
     	position: relative;    	
 	}
-	.row:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
-	.pagination {
-		text-align: center;
-	}
 </style>
 </head>
 <body>
@@ -46,7 +59,8 @@
 	<a href="${contextPath}/buyer/cart.htm?uid=${user.personID}">Cart</a>
 	<a href="${contextPath}/buyer/order.htm">Orders</a>	
 	
-	<h1>List of Products</h1>	
+	<h1>List of Products</h1>
+	<form><p>Search Products: <input type="text" name="search" id="search" /></p></form>	
 	<div class="container">
 		<div class="row">
 			<c:forEach var="product" items="${products}">
