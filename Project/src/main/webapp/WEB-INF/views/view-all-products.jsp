@@ -22,7 +22,11 @@
 				cache : false,
 				success : function(response) {
 					//alert(response);
-					$("#container").load(location.href + " #container>*", "");
+					if(Math.abs(response) == 0) {
+						$("#container").text("No products");
+					} else {
+						$("#container").load(location.href + " #container>*", "");
+					}					
 				}
 			});
 		});

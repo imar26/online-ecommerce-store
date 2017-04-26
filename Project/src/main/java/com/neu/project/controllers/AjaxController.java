@@ -127,7 +127,7 @@ public class AjaxController {
 			List<Product> searchList = buyerDao.searchProducts(searchValue);
 			System.out.println("Size List: "+searchList.size());
 			session.setAttribute("products", searchList);
-			output = "list retured";
+			output = String.valueOf(searchList.size());
 			return output;
 		} catch(HibernateException e) {
 			System.out.println("Exception: " + e.getMessage());
