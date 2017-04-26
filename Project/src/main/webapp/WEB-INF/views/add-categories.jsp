@@ -27,7 +27,7 @@
 			<tr>
 				<td>Category Name:</td>
 				<td>
-					<form:input path="categoryName" required="required" />
+					<form:input path="categoryName" required="required" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="categoryName" /></font>
 				</td>
 			</tr>
