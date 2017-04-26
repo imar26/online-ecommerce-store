@@ -21,7 +21,7 @@
 	<a href="${contextPath}/admin/manage-categories.htm">Go Back</a>
 	
 	<h1>Add new category</h1>
-	<form:form action="${contextPath}/admin/addCategory.htm" method="post" commandName="category">
+	<form:form data-toggle="validator" action="${contextPath}/admin/addCategory.htm" method="post" commandName="category">
 
 		<table>
 			<tr>

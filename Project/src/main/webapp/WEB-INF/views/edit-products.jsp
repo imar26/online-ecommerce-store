@@ -7,6 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Edit Products</title>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#submit").on('click', function() {
+		var qty = $("#quantity").val();
+		if(qty <=0) {
+			alert("Quantity cannot be 0 or less than 0");
+			return false;
+		}
+	});
+});
+</script>
 </head>
 <body>
 	<%
@@ -21,7 +33,7 @@
 	<a href="${contextPath}/seller/view-products.htm?sellerId=${sessionScope.seller.personID}">Go back</a>
 	
 	<h1>Edit Product</h1>
-	<form:form action="updateProducts.htm" commandName="product" method="post" enctype="multipart/form-data">
+	<form:form data-toggle="validator" action="updateProducts.htm" commandName="product" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>Posted By</td>
@@ -44,7 +56,7 @@
 					Product Description:
 				</td>
 				<td>
-					<form:textarea path="productDesc" required="required" value="${product.productDesc}" />
+					<form:textarea path="productDesc" required="required" value="${product.productDesc}" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="productDesc" /></font>
 				</td>
 			</tr>
@@ -53,7 +65,7 @@
 					Price:
 				</td>
 				<td>
-					<form:input path="productPrice" required="required" value="${product.productPrice}" />
+					<form:input path="productPrice" required="required" value="${product.productPrice}" pattern="[0-9]*\.?[0-9]*" />
 					<font color="red"><form:errors path="productPrice" /></font>
 				</td>
 			</tr>
@@ -62,7 +74,7 @@
 					Quantity:
 				</td>
 				<td>
-					<form:input path="productQuantity" required="required" value="${product.productQuantity}" />
+					<form:input id="quantity" type="number" path="productQuantity" required="required" value="${product.productQuantity}" pattern="^[_0-9]{1,}$" />
 					<font color="red"><form:errors path="productQuantity" /></font>
 				</td>
 			</tr>
@@ -76,7 +88,7 @@
 				</td>
 			</tr>					
 			<tr>
-				<td colspan="2"><input type="submit" value="Update Product" /></td>
+				<td colspan="2"><input type="submit" id="submit" value="Update Product" /></td>
 				<td colspan="2"><input type="hidden" name="pid" value="${product.productID}" /></td>
 				<td colspan="2"><input type="hidden" name="filename" value="${product.fileName}" /></td>
 			</tr>

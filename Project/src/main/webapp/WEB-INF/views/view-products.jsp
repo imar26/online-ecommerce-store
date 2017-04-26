@@ -12,7 +12,7 @@ $(document).ready(function() {
 	$(document).on('click','.delete',function(e) {
 		e.preventDefault();
 		var pid = $(this).parent().parent().data('id');
-		alert(pid);
+		//alert(pid);
 		$.ajax({
 			url : 'deleteProducts.htm',
 			contentType : "application/json; charset=utf-8",
@@ -23,7 +23,7 @@ $(document).ready(function() {
 			cache : false,
 			success : function(
 					response) {
-					alert(response);
+					//alert(response);
 					$("#row-"+response).fadeOut();														
 			}
 		});

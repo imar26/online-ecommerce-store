@@ -7,6 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#submit").on('click', function() {
+		var qty = $("#quantity").val();
+		if(qty <=0) {
+			alert("Quantity cannot be 0 or less than 0");
+			return false;
+		}
+	});
+});
+</script>
 </head>
 <body>
 	<%
@@ -21,7 +33,7 @@
 	<a href="${contextPath}/seller/seller-home.htm">Go Back</a><br/><br/>
 	
 	<h1>Add a new product</h1>
-	<form:form action="addProducts.htm" commandName="product" method="post" enctype="multipart/form-data">
+	<form:form data-toggle="validator" action="addProducts.htm" commandName="product" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>Posted By</td>
@@ -36,7 +48,7 @@
 					Product Name:
 				</td>
 				<td>
-					<form:input path="productName" required="required" />
+					<form:input path="productName" required="required" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="productName" /></font>
 				</td>
 			</tr>
@@ -45,7 +57,7 @@
 					Product Description:
 				</td>
 				<td>
-					<form:textarea path="productDesc" required="required" />
+					<form:textarea path="productDesc" required="required" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="productDesc" /></font>
 				</td>
 			</tr>
@@ -54,7 +66,7 @@
 					Price:
 				</td>
 				<td>
-					<form:input path="productPrice" required="required" />
+					<form:input path="productPrice" required="required" pattern="[0-9]*\.?[0-9]*" />
 					<font color="red"><form:errors path="productPrice" /></font>
 				</td>
 			</tr>
@@ -63,7 +75,7 @@
 					Quantity:
 				</td>
 				<td>
-					<form:input path="productQuantity" required="required" />
+					<form:input id="quantity" type="number" path="productQuantity" required="required" pattern="^[_0-9]{1,}$"/>
 					<font color="red"><form:errors path="productQuantity" /></font>
 				</td>
 			</tr>
@@ -77,7 +89,7 @@
 				</td>
 			</tr>					
 			<tr>
-				<td colspan="2"><input type="submit" value="Add Product" /></td>
+				<td colspan="2"><input type="submit" id="submit" value="Add Product" /></td>
 				<td colspan="2"><input type="hidden" name="seller-name" value="${sessionScope.seller.personID}" /></td>
 			</tr>
 		</table>
