@@ -9,13 +9,6 @@
 <title>Seller Signup</title>
 </head>
 <body>
-	<%
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
-            String role = (String) session.getAttribute("role");
-            if (role == "seller") {
-    %>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/signup.htm">Go Back</a><br/>	
 	<h1>Register a new seller</h1>
@@ -144,8 +137,5 @@
 			</tr>
 		</table>
 	</form:form>
-	<%
-            }
-	%>
 </body>
 </html>

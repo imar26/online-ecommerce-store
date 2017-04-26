@@ -44,7 +44,7 @@
 					First Name:
 				</td>
 				<td>
-					<form:input path="firstName" required="required" />
+					<form:input path="firstName" />
 					<font color="red"><form:errors path="firstName" /></font>
 				</td>
 			</tr>

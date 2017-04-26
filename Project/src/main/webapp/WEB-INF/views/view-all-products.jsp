@@ -26,7 +26,7 @@
 				}
 			});
 		});
-		$("#submit").on('click', function() {
+		$("#filter").on('change', function() {
 			  var filter = $("#filter").val();
 			  $.ajax({
 					url : 'filterProducts.htm',
@@ -97,7 +97,6 @@ body {
 				<option value="h2l">High to Low</option>
 				<option value="l2h">Low to High</option>
 			</select>
-			<input type="submit" id="submit" />
 		</p>
 	</form>
 	<div id="container" class="container">

@@ -86,4 +86,17 @@ public class SellerController {
 			return new ModelAndView("error", "errorMessage", "error while login");
 		}
 	}
+	
+	@RequestMapping(value = "/seller/view-all-orders.htm", method = RequestMethod.GET)
+	protected ModelAndView viewAllProd(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = (HttpSession) request.getSession();
+		
+		long id = Long.parseLong(request.getParameter("sellerId"));
+		mv.addObject("sellerID", id);
+		mv.addObject("orders", sellerDao.orderlist());
+
+		mv.setViewName("view-all-orders");
+		return mv;
+	}
 }

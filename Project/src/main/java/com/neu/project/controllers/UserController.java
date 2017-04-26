@@ -51,6 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/buyer/buyersignup.htm", method = RequestMethod.POST)
 	protected ModelAndView registerBuyer(HttpServletRequest request,  @ModelAttribute("user") User user, BindingResult result) throws Exception {
+		
 		try {
 //			System.out.println(request.getParameter("username"));
 			Boolean b1 = userDao.checkIfUsernameExists(request.getParameter("username"));

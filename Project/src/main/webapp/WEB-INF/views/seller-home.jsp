@@ -20,6 +20,7 @@
 	<a href="${contextPath}/logout.htm">Logout</a><br/><br/>
 	<a href="${contextPath}/seller/add-products.htm">Add Products</a><br/>
 	<a href="${contextPath}/seller/view-products.htm?sellerId=${seller.personID}">View Products</a>
+	<a href="${contextPath}/seller/view-all-orders.htm?sellerId=${seller.personID}">View All Orders</a>
 	<%
             }
 	%>

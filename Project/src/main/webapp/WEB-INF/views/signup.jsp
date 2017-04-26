@@ -12,7 +12,7 @@
 <a href="${contextPath}/index.htm">Go Back</a><br/>
 <h1>SignUp page</h1>
 <form method="post" action="redirectsignup.htm">
-  <input type="radio" name="signup" value="buyer"> SignUp as Buyer<br>
+  <input type="radio" name="signup" value="buyer" checked> SignUp as Buyer<br>
   <input type="radio" name="signup" value="seller"> SignUp as Seller<br>
   <input type="submit" value="Submit" />
 </form>

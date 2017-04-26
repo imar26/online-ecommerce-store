@@ -12,6 +12,7 @@ import com.neu.project.exception.SellerException;
 import com.neu.project.exception.UserException;
 import com.neu.project.pojo.Address;
 import com.neu.project.pojo.Email;
+import com.neu.project.pojo.Order;
 import com.neu.project.pojo.Phone;
 import com.neu.project.pojo.Product;
 import com.neu.project.pojo.Seller;
@@ -21,6 +22,19 @@ public class SellerDAO extends DAO {
 	public SellerDAO() {
 		
 	}
+	
+	public List<Order> orderlist() throws SellerException {
+        try {
+            begin();
+            Query q = getSession().createQuery("from Order");
+            List<Order> list = q.list();
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new SellerException("Could not list the orders", e);
+        }
+    }
 	
 	public int getTotalCount() throws SellerException {
 		try {
