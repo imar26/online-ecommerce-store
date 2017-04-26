@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 
 import com.neu.project.exception.UserException;
 import com.neu.project.pojo.Address;
@@ -22,6 +24,9 @@ public class UserDAO extends DAO {
 	public User get(String username, String password) throws UserException {
 		try {
 			begin();
+//			Criteria criteria = getSession().createCriteria(User.class);
+//			criteria.add(Restrictions.eq("username", username));
+//			criteria.add(Restrictions.eq("password", password));
 			Query q = getSession().createQuery("from User where username = :username and password = :password");
 			q.setString("username", username);
 			q.setString("password", password);			

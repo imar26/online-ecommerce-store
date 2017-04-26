@@ -39,9 +39,11 @@ public class BuyerDAO extends DAO {
         try {
         	System.out.println("In search products dao");
             begin();
-            Criteria crit = getSession().createCriteria(Product.class);
-            crit.add(Restrictions.ilike("productName", "%"+keyword+"%"));
-            List<Product> list = (List<Product>)crit.list();
+            Query query = getSession().createQuery("from Product where productName like :keyword");
+            query.setParameter("keyword", "%"+keyword+"%");
+//            Criteria crit = getSession().createCriteria(Product.class);
+//            crit.add(Restrictions.ilike("productName", "%"+keyword+"%"));
+            List<Product> list = (List<Product>)query.list();
             System.out.println("List size: "+list.size());
             System.out.println(list);
             commit();
