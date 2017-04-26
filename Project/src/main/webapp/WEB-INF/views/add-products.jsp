@@ -84,7 +84,7 @@ $(document).ready(function() {
 					Product Image:
 				</td>
 				<td>
-					<form:input type="file" path="photo" required="required" />
+					<form:input type="file" path="photo" required="required" accept="image/x-png,image/gif,image/jpeg" />
 					<font color="red"><form:errors path="photo" /></font>
 				</td>
 			</tr>					
