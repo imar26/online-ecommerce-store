@@ -37,14 +37,14 @@
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/signup.htm">Go Back</a><br/>
 	<h1>Register a new buyer</h1>
-	<form:form action="buyer/buyersignup.htm" commandName="user" method="post">
+	<form:form data-toggle="validator" action="buyer/buyersignup.htm" commandName="user" method="post">
 		<table>
 			<tr>
 				<td>
 					First Name:
 				</td>
 				<td>
-					<form:input path="firstName" />
+					<form:input path="firstName" required="required" pattern="[a-zA-z]+" />
 					<font color="red"><form:errors path="firstName" /></font>
 				</td>
 			</tr>
@@ -53,7 +53,7 @@
 					Last Name:
 				</td>
 				<td>
-					<form:input path="lastName" required="required" />
+					<form:input path="lastName" required="required" pattern="[a-zA-z]+" />
 					<font color="red"><form:errors path="lastName" /></font>
 				</td>
 			</tr>
@@ -62,7 +62,7 @@
 					User Name:
 				</td>
 				<td>
-					<form:input path="username" required="required" />
+					<form:input path="username" required="required" pattern="[a-zA-Z0-9]+" />
 					<font color="red"><form:errors path="username" /></font>
 				</td>
 			</tr>
@@ -71,7 +71,7 @@
 					Password:
 				</td>
 				<td>
-					<form:password path="password" required="required" />
+					<form:password path="password" required="required" pattern="[a-zA-Z0-9]+" />
 					<font color="red"><form:errors path="password" /></font>
 				</td>
 			</tr>
@@ -89,7 +89,7 @@
 					Phone no:
 				</td>
 				<td>
-					<form:input path="phone.phoneNo" maxlength="10" required="required" />
+					<form:input path="phone.phoneNo" maxlength="10" required="required" pattern="[123456789][0-9]{9}" />
 					<font color="red"><form:errors path="phone.phoneNo" /></font>
 				</td>
 			</tr>
@@ -107,7 +107,7 @@
 					Street:
 				</td>
 				<td>
-					<form:input id="street1" path="address[0].street" required="required" />
+					<form:input id="street1" path="address[0].street" required="required" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="address[0].street" /></font>
 				</td>
 			</tr>
@@ -116,7 +116,7 @@
 					City:
 				</td>
 				<td>
-					<form:input id="city1" path="address[0].city" required="required" />
+					<form:input id="city1" path="address[0].city" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[0].city" /></font>
 				</td>
 			</tr>
@@ -125,7 +125,7 @@
 					State:
 				</td>
 				<td>
-					<form:input id="state1" path="address[0].state" required="required" />
+					<form:input id="state1" path="address[0].state" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[0].state" /></font>
 				</td>
 			</tr>
@@ -134,7 +134,7 @@
 					Zip Code:
 				</td>
 				<td>
-					<form:input id="zip1" path="address[0].zip" required="required" maxlength="5" />
+					<form:input id="zip1" path="address[0].zip" required="required" maxlength="5" pattern="^[_0-9]{5,}$" />
 					<font color="red"><form:errors path="address[0].zip" /></font>
 				</td>
 			</tr>
@@ -143,7 +143,7 @@
 					Country:
 				</td>
 				<td>
-					<form:input id="country1" path="address[0].country" required="required" />
+					<form:input id="country1" path="address[0].country" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[0].country" /></font>
 				</td>
 			</tr>
@@ -166,7 +166,7 @@
 					Street:
 				</td>
 				<td>
-					<form:input id="street2" path="address[1].street" required="required" />
+					<form:input id="street2" path="address[1].street" required="required" pattern="[a-zA-Z0-9 ]+" />
 					<font color="red"><form:errors path="address[1].street" /></font>
 				</td>
 			</tr>
@@ -175,7 +175,7 @@
 					City:
 				</td>
 				<td>
-					<form:input id="city2" path="address[1].city" required="required" />
+					<form:input id="city2" path="address[1].city" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[1].city" /></font>
 				</td>
 			</tr>
@@ -184,7 +184,7 @@
 					State:
 				</td>
 				<td>
-					<form:input id="state2" path="address[1].state" required="required" />
+					<form:input id="state2" path="address[1].state" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[1].state" /></font>
 				</td>
 			</tr>
@@ -193,7 +193,7 @@
 					Zip Code:
 				</td>
 				<td>
-					<form:input id="zip2" path="address[1].zip" required="required" maxlength="5" />
+					<form:input id="zip2" path="address[1].zip" required="required" maxlength="5" pattern="^[_0-9]{5,}$" />
 					<font color="red"><form:errors path="address[1].zip" /></font>
 				</td>
 			</tr>
@@ -202,7 +202,7 @@
 					Country:
 				</td>
 				<td>
-					<form:input id="country2" path="address[1].country" required="required" />
+					<form:input id="country2" path="address[1].country" required="required" pattern="[a-zA-z ]+" />
 					<font color="red"><form:errors path="address[1].country" /></font>
 				</td>
 			</tr>			
