@@ -15,6 +15,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.neu.project.exception.BuyerException;
 import com.neu.project.exception.CategoryException;
@@ -44,7 +48,7 @@ public class ProductDAO extends DAO {
 		try {
 			begin();
 			Query q = getSession().createQuery("from Product");
-			List<Product> list = q.list();
+			List<Product> list = (List<Product>)q.list();
 			commit();
 			return list;
 		} catch (HibernateException e) {
@@ -52,6 +56,40 @@ public class ProductDAO extends DAO {
 			throw new ProductException("Could not list the products", e);
 		}
 	}
+	
+	public List<Product> filterH2l() throws ProductException {
+        try {
+        	System.out.println("In search products dao");
+            begin();
+            Criteria crit = getSession().createCriteria(Product.class);
+            crit.addOrder(Order.desc("productPrice"));
+            List<Product> list = (List<Product>)crit.list();
+            System.out.println("List size: "+list.size());
+            System.out.println(list);
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new ProductException("Could not list the products", e);
+        }
+    }
+	
+	public List<Product> filterL2h() throws ProductException {
+        try {
+        	System.out.println("In search products dao");
+            begin();
+            Criteria crit = getSession().createCriteria(Product.class);
+            crit.addOrder(Order.asc("productPrice"));
+            List<Product> list = (List<Product>)crit.list();
+            System.out.println("List size: "+list.size());
+            System.out.println(list);
+            commit();
+            return list;
+        } catch (HibernateException e) {
+            rollback();
+            throw new ProductException("Could not list the products", e);
+        }
+    }
 
 	public Product get(int productId) throws ProductException {
 		try {
@@ -100,7 +138,7 @@ public class ProductDAO extends DAO {
 			Query q = getSession().createQuery("Update Product set productDesc = :productDesc, productPrice = :productPrice, productQuantity = :productQuantity, fileName = :filename where productID = :productID");
 			q.setLong("productID", p.getProductID());
 			q.setString("productDesc", p.getProductDesc());
-			q.setString("productPrice", p.getProductPrice());
+			q.setDouble("productPrice", p.getProductPrice());
 			q.setLong("productQuantity", p.getProductQuantity());
 			q.setString("filename", p.getFileName());
 			System.out.println(p.getProductID());

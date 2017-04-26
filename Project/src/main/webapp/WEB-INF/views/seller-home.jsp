@@ -8,10 +8,20 @@
 <title>Seller Home Page</title>
 </head>
 <body>
+	<%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+            String role = (String) session.getAttribute("role");
+            if (role == "seller") {
+    %>
 	<h1>Hi, ${seller.firstName}</h1>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a><br/><br/>
 	<a href="${contextPath}/seller/add-products.htm">Add Products</a><br/>
 	<a href="${contextPath}/seller/view-products.htm?sellerId=${seller.personID}">View Products</a>
+	<%
+            }
+	%>
 </body>
 </html>

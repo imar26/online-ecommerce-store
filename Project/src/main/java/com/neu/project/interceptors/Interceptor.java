@@ -23,6 +23,19 @@ public class Interceptor extends HandlerInterceptorAdapter {
         System.out.println("----------------------");
         HttpSession session = (HttpSession) request.getSession();
         System.out.println("--"+session.getAttribute("role"));
+        
+        if(request.getParameter("buyersignup")!=null){
+            if(request.getParameter("buyersignup").equals("Register Buyer")){
+                session.setAttribute("role", "buyer");
+            }   
+        }
+        if(request.getParameter("sellersignup")!=null){
+            if(request.getParameter("sellersignup").equals("Register Seller")){
+                session.setAttribute("role", "seller");
+            } 
+        }
+        
+        
         if(session.getAttribute("role") == null){
             if((request.getRequestURI().contains("seller/"))||
                     (request.getRequestURI().contains("buyer/"))||(request.getRequestURI().contains("admin/")))

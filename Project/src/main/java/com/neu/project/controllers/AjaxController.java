@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,19 +119,44 @@ public class AjaxController {
 	@RequestMapping(value = "/buyer/searchProducts.htm", method = RequestMethod.GET)
 	public @ResponseBody
 	String searchProducts(HttpServletRequest request) throws ProductException {
-		String json = "";
+		String output = "";
 		try {
+			HttpSession session = (HttpSession) request.getSession();
 			String searchValue = request.getParameter("searchValue");
 			System.out.println("Search for: "+searchValue);
 			List<Product> searchList = buyerDao.searchProducts(searchValue);
 			System.out.println("Size List: "+searchList.size());
-			json = new Gson().toJson(searchList);
-			System.out.println("JSON:" +json);
-			return json;
+			session.setAttribute("products", searchList);
+			output = "list retured";
+			return output;
 		} catch(HibernateException e) {
 			System.out.println("Exception: " + e.getMessage());
 		}		
-		return null;
+		return output;
+	}
+	
+	@RequestMapping(value = "/buyer/filterProducts.htm", method = RequestMethod.GET)
+	public @ResponseBody
+	String filterProducts(HttpServletRequest request) throws ProductException {
+		String output = "";
+		try {
+			HttpSession session = (HttpSession) request.getSession();
+			String filter = request.getParameter("filter");
+			System.out.println("Search for: "+filter);
+			List<Product> filterList = new ArrayList<Product>();
+			if(filter.equals("h2l")) {
+				filterList = productDao.filterH2l();
+			} else if(filter.equals("l2h")) {
+				filterList = productDao.filterL2h();
+			}
+			System.out.println("Size List: "+filterList.size());
+			session.setAttribute("products", filterList);
+			output = "list retured";
+			return output;
+		} catch(HibernateException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}		
+		return output;
 	}
 	
 	@RequestMapping(value = "/admin/deleteCategory.htm", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
@@ -148,7 +174,7 @@ public class AjaxController {
 		return output;
 	}
 	
-	@RequestMapping(value = "/seller/deleteProduct.htm", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	@RequestMapping(value = "/seller/deleteProducts.htm", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public @ResponseBody
 	String deleteProduct(HttpServletRequest request) throws ProductException {
 		String output = "";
@@ -157,6 +183,7 @@ public class AjaxController {
 			System.out.println("ID is: "+pid);
 			productDao.deleteProduct(pid);
 			output = String.valueOf(pid);
+			System.out.println("output is: "+output);
 		} catch(HibernateException e) {
 			System.out.println("Exception: " + e.getMessage());
 		}

@@ -8,11 +8,21 @@
 <title>Manage Categories</title>
 </head>
 <body>
+	<%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+            String role = (String) session.getAttribute("role");
+            if (role == "admin") {
+    %>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
 	<a href="${contextPath}/admin/admin-home.htm">Go back</a><br/>
 	
 	<a href="${contextPath}/admin/view-categories.htm">View Categories</a><br/>
 	<a href="${contextPath}/admin/add-categories.htm">Add Categories</a> 
+	<%
+            }
+	%>
 </body>
 </html>

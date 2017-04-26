@@ -97,7 +97,7 @@ public class ProductController {
 				String fileName = photoInMemory.getOriginalFilename();
 				// could generate file names as well
 
-				File localFile = new File("C:/Users/Aadesh/Downloads/Web_Tools/SpringProjects/Project/src/main/webapp/resources/images/", fileName);
+				File localFile = new File("C:/photos/", fileName);
 
 				// move the file from memory to the file
 
@@ -138,6 +138,7 @@ public class ProductController {
 			long productId = Long.parseLong(request.getParameter("pid"));
 			product.setProductID(productId);
 			String filename = request.getParameter("filename");
+			System.out.println("Old "+filename);
 			product.setFileName(filename);
 			CommonsMultipartFile photoInMemory = product.getPhoto();
 			System.out.println("photo is: "+photoInMemory);
@@ -145,8 +146,8 @@ public class ProductController {
 			if(!photoInMemory.isEmpty()) {
 				String fileName = photoInMemory.getOriginalFilename();
 				// could generate file names as well
-
-				File localFile = new File("C:/Users/Aadesh/Downloads/Web_Tools/SpringProjects/Project/src/main/webapp/resources/images/", fileName);
+				System.out.println("New "+fileName);
+				File localFile = new File("C:/photos/", fileName);
 
 				// move the file from memory to the file
 
@@ -178,16 +179,16 @@ public class ProductController {
 	@RequestMapping(value = "/buyer/view-all-products.htm", method = RequestMethod.GET)
 	protected ModelAndView viewAllProd(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("products", productDao.list());		
+		HttpSession session = (HttpSession) request.getSession();
+		//mv.addObject("products", productDao.list());
+		
+		if(session.getAttribute("products") != null) {
+			mv.setViewName("view-all-products");
+			return mv;
+		}
+		
+		session.setAttribute("products", productDao.list());
 		mv.setViewName("view-all-products");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/buyer/search-products.htm", method = RequestMethod.GET)
-	protected ModelAndView searchProd(HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("products", productDao.list());		
-		mv.setViewName("search-products");
 		return mv;
 	}
 	

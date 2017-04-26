@@ -34,7 +34,7 @@ public class Product {
 	private String productDesc;
 	
 	@Column(name="productPrice")
-	private String productPrice;
+	private Double productPrice;
 	
 	@Column(name="productQuantity")
 	private long productQuantity;
@@ -57,7 +57,7 @@ public class Product {
 	@OneToMany(mappedBy = "products")
     private List<Order> order = new ArrayList<Order>();
 	
-	public Product(String productName, String productDesc, String productPrice, long productQuantity) {
+	public Product(String productName, String productDesc, Double productPrice, long productQuantity) {
 		this.productName = productName;
 		this.productDesc = productDesc;
 		this.productPrice = productPrice;
@@ -92,11 +92,11 @@ public class Product {
 		this.productDesc = productDesc;
 	}
 
-	public String getProductPrice() {
+	public Double getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(String productPrice) {
+	public void setProductPrice(Double productPrice) {
 		this.productPrice = productPrice;
 	}
 

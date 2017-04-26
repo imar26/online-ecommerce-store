@@ -53,6 +53,13 @@
 </style>
 </head>
 <body>
+	<%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+            String role = (String) session.getAttribute("role");
+            if (role == "buyer") {
+    %>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
 	<a href="${contextPath}/buyer/buyer-home.htm">Go back</a>
@@ -85,5 +92,8 @@
 			</c:forEach>
 		</div>
 	</div>
+	<%
+            }
+	%>
 </body>
 </html>

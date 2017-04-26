@@ -41,8 +41,9 @@ public class BuyerDAO extends DAO {
             begin();
             Criteria crit = getSession().createCriteria(Product.class);
             crit.add(Restrictions.ilike("productName", "%"+keyword+"%"));
-            List<Product> list = crit.list();
+            List<Product> list = (List<Product>)crit.list();
             System.out.println("List size: "+list.size());
+            System.out.println(list);
             commit();
             return list;
         } catch (HibernateException e) {

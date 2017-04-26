@@ -8,6 +8,13 @@
 <title>Buyer Home Page</title>
 </head>
 <body>
+	<%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+            String role = (String) session.getAttribute("role");
+            if (role == "buyer") {
+    %>
 	<h1>Hi, ${user.firstName}</h1>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
@@ -16,7 +23,9 @@
 	
 	<a href="${contextPath}/buyer/view-all-products.htm">View All Products</a>
 	<!-- <a href="${contextPath}/buyer/search-products.htm">Search Products</a> -->
-	
+	<%
+            }
+	%>
 	
 </body>
 </html>

@@ -207,7 +207,7 @@
 				</td>
 			</tr>			
 			<tr>
-				<td colspan="2"><input type="submit" value="Register Buyer" /></td>
+				<td colspan="2"><input type="submit" name="buyersignup" value="Register Buyer" /></td>
 			</tr>
 		</table>
 	</form:form>

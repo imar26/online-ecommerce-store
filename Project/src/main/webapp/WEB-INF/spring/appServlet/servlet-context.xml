@@ -25,8 +25,7 @@
 	
 	<interceptors>
         <interceptor>
-            <mapping path="/**/*" />
-            <exclude-mapping path="/redirectlogin.htm" />
+            <mapping path="/**/*" />            
             <beans:bean class="com.neu.project.interceptors.Interceptor">
                 <beans:property name="errorPage" value="" />
             </beans:bean>                       

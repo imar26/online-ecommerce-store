@@ -12,8 +12,9 @@ $(document).ready(function() {
 	$(document).on('click','.delete',function(e) {
 		e.preventDefault();
 		var pid = $(this).parent().parent().data('id');
+		alert(pid);
 		$.ajax({
-			url : 'deleteProduct.htm',
+			url : 'deleteProducts.htm',
 			contentType : "application/json; charset=utf-8",
 			data : {
 				'pid' : pid
@@ -22,6 +23,7 @@ $(document).ready(function() {
 			cache : false,
 			success : function(
 					response) {
+					alert(response);
 					$("#row-"+response).fadeOut();														
 			}
 		});
@@ -30,6 +32,13 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+	<%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+            String role = (String) session.getAttribute("role");
+            if (role == "seller") {
+    %>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<a href="${contextPath}/logout.htm">Logout</a>
 	<a href="${contextPath}/seller/seller-home.htm">Go back</a>
@@ -62,5 +71,8 @@ $(document).ready(function() {
 			<c:out value="No Products Found." />
 		</c:otherwise>
 	</c:choose>
+	<%
+            }
+	%>
 </body>
 </html>

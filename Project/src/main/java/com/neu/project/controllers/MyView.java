@@ -60,17 +60,17 @@ public class MyView extends AbstractPdfView {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         
         
-        long totalprice = 0;
+        double totalprice = 0;
         for(Order order:list)
         {
         	String requiredDate = df.format(order.getDate()).toString();
             table.addCell(new Paragraph(order.getProduct().getProductName(),FontFactory.getFont(FontFactory.TIMES, 11,Font.BOLD)));
             table.addCell(String.valueOf(order.getQuantity()));
             table.addCell(String.valueOf(order.getProduct().getProductPrice()));
-            table.addCell(String.valueOf(order.getQuantity() * Integer.parseInt(order.getProduct().getProductPrice())));
+            table.addCell(String.valueOf(order.getQuantity() * order.getProduct().getProductPrice()));
             table.addCell(requiredDate);
             table.addCell(String.valueOf(order.getProduct().getSeller().getCompanyName()));
-            totalprice = totalprice +((order.getQuantity())*Integer.parseInt(order.getProduct().getProductPrice()));
+            totalprice = totalprice +((order.getQuantity())*order.getProduct().getProductPrice());
         }
         
         document.add(table);
