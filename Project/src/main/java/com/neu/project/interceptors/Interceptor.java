@@ -20,9 +20,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        System.out.println("----------------------");
         HttpSession session = (HttpSession) request.getSession();
-        System.out.println("--"+session.getAttribute("role"));
+        System.out.println(session.getAttribute("role"));
         
         if(request.getParameter("buyersignup")!=null){
             if(request.getParameter("buyersignup").equals("Register Buyer")){
@@ -40,36 +39,35 @@ public class Interceptor extends HandlerInterceptorAdapter {
             if((request.getRequestURI().contains("seller/"))||
                     (request.getRequestURI().contains("buyer/"))||(request.getRequestURI().contains("admin/")))
             {
-                System.out.println("in interceptor1");
-                System.out.println("1 -false");
+                System.out.println("First Interceptor");
+                System.out.println("break");
                 response.sendRedirect(request.getContextPath());
                 return false;
             }
-            System.out.println("in interceptor2");
+            System.out.println("Second Interceptor");
             return true;
         }
 
         if(session.getAttribute("role") != null){
-            System.out.println("in interceptor3");
+            System.out.println("Third Interceptor");
             if((request.getRequestURI().contains("admin") && session.getAttribute("role").equals("admin")) ||
                     (request.getRequestURI().contains("seller") && session.getAttribute("role").equals("seller"))||
                     (request.getRequestURI().contains("buyer") && session.getAttribute("role").equals("buyer")))
             {
-                System.out.println("in interceptor4");
+                System.out.println("Fourth Interceptor");
                 return true;
             }else if((!request.getRequestURI().contains("admin"))&&
                     (!request.getRequestURI().contains("seller"))&&
                     (!request.getRequestURI().contains("buyer")))
             {
-                System.out.println("in interceptor5");
+                System.out.println("Fifth Interceptor");
                 return true;
             }
         }
 
-        System.out.println("NOT VALID!!");
         System.out.println(request.getContextPath());
         response.sendRedirect(request.getContextPath());
-        System.out.println("1 -false");
+        System.out.println("break");
         return false;
     }
 }
